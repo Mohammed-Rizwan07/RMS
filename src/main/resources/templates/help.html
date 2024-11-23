@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Help - Project Assistance</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #4caf50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    main {
+      padding: 20px;
+    }
+    .header-actions h2 {
+      font-size: 24px;
+      color: #4caf50;
+    }
+    .help-content {
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .help-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    .help-list li {
+      margin: 10px 0;
+    }
+    .help-list a {
+      color: #4caf50;
+      text-decoration: none;
+    }
+    .help-list a:hover {
+      text-decoration: underline;
+    }
+    .question-answer {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border-left: 4px solid #4caf50;
+    }
+    .submit-question {
+      margin-top: 30px;
+    }
+    .submit-question h3 {
+      font-size: 20px;
+      color: #4caf50;
+    }
+    .submit-question form div {
+      margin-bottom: 15px;
+    }
+    .submit-question input, .submit-question textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    .submit-question button {
+      background-color: #8bc34a;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+      max-width: 320px;
+      margin-top: 15px;
+    }
+    .submit-question button:hover {
+      background-color: #7cb342;
+    }
+    .back-btn {
+      margin-top: 30px;
+      padding: 10px 20px;
+      border: none;
+      background-color: #f44336;
+      color: white;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    .back-btn:hover {
+      background-color: #e53935;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Project Assistance</h1>
+</header>
+
+<main>
+  <div class="ideator-content">
+    <div class="header-actions">
+      <h2>How Can We Help?</h2>
+    </div>
+
+    <div class="help-content">
+      <h3>Common Questions</h3>
+      <ul class="help-list">
+        <li><a href="#question1">How to create a new project?</a></li>
+        <li><a href="#question2">How to edit an existing project?</a></li>
+        <li><a href="#question3">How to delete a project?</a></li>
+      </ul>
+
+      <div id="question1" class="question-answer">
+        <h4>How to create a new project?</h4>
+        <p>To create a new project, go to the "Manage Projects" page and click the "Create New Project" button. Fill in the necessary details and submit the form.</p>
+      </div>
+
+      <div id="question2" class="question-answer">
+        <h4>How to edit an existing project?</h4>
+        <p>To edit an existing project, click the "Edit" button next to the project you want to modify. Make the required changes and submit the updates.</p>
+      </div>
+
+      <div id="question3" class="question-answer">
+        <h4>How to delete a project?</h4>
+        <p>To delete a project, click the "Delete" button next to the project you wish to remove. Confirm the deletion to permanently delete the project.</p>
+      </div>
+    </div>
+
+    <div class="submit-question">
+      <h3>Still Need Help? Ask a Question</h3>
+      <form th:action="@{/submitQuestion}" method="post" th:object="${helpQuestion}">
+        <div>
+          <label for="name">Your Name:</label>
+          <input type="text" id="name" th:field="*{name}" required placeholder="Enter your name">
+        </div>
+        <div>
+          <label for="email">Your Email:</label>
+          <input type="email" id="email" th:field="*{email}" required placeholder="Enter your email">
+        </div>
+        <div>
+          <label for="question">Your Question:</label>
+          <textarea id="question" th:field="*{question}" required placeholder="Describe your question here..."></textarea>
+        </div>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <button type="submit">Submit Question</button>
+      </form>
+    </div>
+
+    <button class="back-btn" onclick="window.history.back()">Back</button>
+  </div>
+</main>
+
+</body>
+</html>
